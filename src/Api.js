@@ -1,4 +1,4 @@
-import axios from 'axios';
+// import axios from 'axios';
 
 const myHeaders = new Headers();
 myHeaders.append("apikey", "eQWUcNgFaIDYHbnDQlu6iYoRZnT3fMvo");
@@ -11,16 +11,16 @@ const requestOptions = {
 const date = new Date().toISOString();
 const formatDate = date.split('T')[0];
 
-axios.defaults.baseURL = 'https://api.apilayer.com/fixer/';
+// axios.defaults.baseURL = 'https://api.apilayer.com/fixer/';
 
-const Api = async (url = ``) => {
-  try {
-    const response = await axios.get(url);
-    return response;
-  } catch (error) {
-    console.log(error);
-  }
-};
+// const Api = async (url = ``) => {
+//   try {
+//     const response = await axios.get(url);
+//     return response;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 // export const ApiConvert = () => {
  
