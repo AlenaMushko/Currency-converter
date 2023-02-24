@@ -1,9 +1,14 @@
-import { ApiConvert } from "Api";
+
+import { Try } from "./rty";
 
 export const App = () => {
+ 
   return (
     <>
-     <ApiConvert />
+     <Try />
     </>
   );
 };
+
+
+
