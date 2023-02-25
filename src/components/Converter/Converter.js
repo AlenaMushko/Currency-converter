@@ -4,18 +4,13 @@ import 'react-dropdown/style.css';
 import { HiOutlineSwitchHorizontal } from 'react-icons/hi';
 
 import { Wrap, List, Title, Text, SwitchHorizontal } from './Converter.styled';
-import { useFetchCurrency } from 'hoock/useFetchCurrency';
+import { useFetchCurrency } from 'hooks/useFetchCurrency';
 
 export const Converter = () => {
-  const [input, setInput] = useState('');
-  const [output, setOutput] = useState('');
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-
-  useEffect(() => {
-    const haveMoney = ((dataBuy[from] / dataSale[to]) * input).toFixed(2);
-    setOutput(haveMoney);
-  }, [from, to, input]);
+  const [input, setInput] = useState("");
+  const [output, setOutput] = useState("");
+  const [from, setFrom] = useState('USD');
+  const [to, setTo] = useState('EUR');
 
   const { USDBuy, USDSale, EURBuy, EURSale } = useFetchCurrency();
   const dataBuy = {
@@ -33,19 +28,32 @@ export const Converter = () => {
   const buy = Object.keys(dataBuy);
   const sale = Object.keys(dataSale);
 
+  const calculateOutput = (from, to, input) => {
+    const haveMoney = ((dataBuy[from] / dataSale[to]) * input).toFixed(2);
+    setOutput(haveMoney);
+  };
+
+  const handleInputChange = e => {
+    setInput(e.target.value);
+    calculateOutput(from, to, e.target.value);
+  };
+
   const have = e => {
     setFrom(e.value);
+    calculateOutput(e.value, to, input);
   };
 
   const recevie = e => {
     setTo(e.value);
+    calculateOutput(from, e.value, input);
   };
 
   // Function to switch between two currency
   const switchCurrency = () => {
-    const exchangeMoney = ((dataBuy[to] / dataSale[from] ) * output).toFixed(2);
-    setInput(exchangeMoney)  
-    }
+    setFrom(to);
+    setTo(from);
+    calculateOutput(from, to, output);
+  };
 
   return (
     <>
@@ -59,13 +67,14 @@ export const Converter = () => {
               autoComplete="off"
               autoFocus
               placeholder=""
-              onChange={e => setInput(e.target.value)}
+              onChange={handleInputChange}
               value={input}
             />
             <Dropdown
               options={buy}
               placeholder="оберіть валюту"
               onChange={have}
+              value={from}
             />
           </Wrap>
         </li>
@@ -73,7 +82,9 @@ export const Converter = () => {
           <SwitchHorizontal>
             <HiOutlineSwitchHorizontal
               size="32px"
-              onClick={() => { switchCurrency()} }
+              onClick={() => {
+                switchCurrency();
+              }}
             />
           </SwitchHorizontal>
         </li>
@@ -86,7 +97,6 @@ export const Converter = () => {
               autoFocus
               disabled
               placeholder=""
-              onChange={e => setInput(e.target.value)}
               value={output || '0'}
             />
 
@@ -94,6 +104,7 @@ export const Converter = () => {
               options={sale}
               placeholder="оберіть валюту"
               onChange={recevie}
+              value={to}
             />
           </Wrap>
         </li>

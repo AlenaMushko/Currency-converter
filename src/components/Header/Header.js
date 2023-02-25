@@ -1,4 +1,4 @@
-import { useFetchCurrency } from 'hoock/useFetchCurrency';
+import { useFetchCurrency } from 'hooks/useFetchCurrency';
 import { Container, Item, List, Span, Title } from './Header.styled';
 
 export const Header = () => {
