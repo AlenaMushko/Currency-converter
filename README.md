@@ -4,8 +4,8 @@
 
 ### API
 
-https://apilayer.com/marketplace/fixer-api#documentation-tab
+https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5
 
-kay = "eQWUcNgFaIDYHbnDQlu6iYoRZnT3fMvo"
+### Pull contents from any page via API (as JSON/P or raw) and avoid Same-origin policy problems.
 
-###
+https://allorigins.win/
