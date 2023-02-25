@@ -1,37 +1,23 @@
 import { useEffect, useState } from 'react';
 import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 import { HiOutlineSwitchHorizontal } from 'react-icons/hi';
 
-import { ApiConvert } from 'ApiCurrency';
-import { Wrap, List, Title, Text } from './Converter.styled';
+import { Wrap, List, Title, Text, SwitchHorizontal } from './Converter.styled';
+import { useFetchCurrency } from 'hoock/useFetchCurrency';
 
 export const Converter = () => {
-  const [EUR, setEUR] = useState({});
-  const [USD, setUSD] = useState({});
-  const [input, setInput] = useState(0);
-  // const [output, setOutput] = useState(0);
-  // const [from, setFrom] = useState("");
-  // const [to, setTo] = useState("");
+  const [input, setInput] = useState('');
+  const [output, setOutput] = useState('');
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
 
   useEffect(() => {
-    const fetch = async () => {
-      try {
-        const reqvest = await ApiConvert();
-        const USDObj = JSON.parse(reqvest)[0];
-        const EURObj = JSON.parse(reqvest)[1];
-        setEUR(EURObj);
-        setUSD(USDObj);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetch();
-  }, []);
+    const haveMoney = ((dataBuy[from] / dataSale[to]) * input).toFixed(2);
+    setOutput(haveMoney);
+  }, [from, to, input]);
 
-  let USDBuy = Number(USD.buy).toFixed(2);
-  let USDSale = Number(USD.sale).toFixed(2);
-  let EURBuy = Number(EUR.buy).toFixed(2);
-  let EURSale = Number(EUR.sale).toFixed(2);
+  const { USDBuy, USDSale, EURBuy, EURSale } = useFetchCurrency();
   const dataBuy = {
     USD: USDBuy,
     EUR: EURBuy,
@@ -43,14 +29,27 @@ export const Converter = () => {
     EUR: EURSale,
     UAN: 1,
   };
+
   const buy = Object.keys(dataBuy);
   const sale = Object.keys(dataSale);
 
-  console.log(input);
+  const have = e => {
+    setFrom(e.value);
+  };
+
+  const recevie = e => {
+    setTo(e.value);
+  };
+
+  // Function to switch between two currency
+  const switchCurrency = () => {
+    const exchangeMoney = ((dataBuy[to] / dataSale[from] ) * output).toFixed(2);
+    setInput(exchangeMoney)  
+    }
+
   return (
     <>
       <Title>Конвертер валют</Title>
-
       <List>
         <li>
           <Text>Я маю</Text>
@@ -60,29 +59,41 @@ export const Converter = () => {
               autoComplete="off"
               autoFocus
               placeholder=""
-              onChange={(e) => setInput(e.target.value)}
+              onChange={e => setInput(e.target.value)}
+              value={input}
             />
-
             <Dropdown
               options={buy}
               placeholder="оберіть валюту"
+              onChange={have}
             />
           </Wrap>
         </li>
         <li>
-          <div>
+          <SwitchHorizontal>
             <HiOutlineSwitchHorizontal
               size="32px"
+              onClick={() => { switchCurrency()} }
             />
-          </div>
+          </SwitchHorizontal>
         </li>
         <li>
           <Text>Я отримую</Text>
           <Wrap>
-            <input type="text" autoComplete="off" autoFocus placeholder="" />
+            <input
+              type="text"
+              autoComplete="off"
+              autoFocus
+              disabled
+              placeholder=""
+              onChange={e => setInput(e.target.value)}
+              value={output || '0'}
+            />
+
             <Dropdown
               options={sale}
               placeholder="оберіть валюту"
+              onChange={recevie}
             />
           </Wrap>
         </li>

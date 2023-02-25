@@ -23,3 +23,10 @@ display:flex;
 gap:10px;
 list-style:none;
 `;
+
+export const SwitchHorizontal = styled.div`
+border-radius:125px;
+:hover{
+  background-color:turquoise;
+}
+`;
