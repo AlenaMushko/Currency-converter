@@ -8,7 +8,7 @@ text-align:center;
 
 export const List = styled.ul`
 display:flex;
-gap:70px;
+gap:16px;
 list-style:none;
 align-items:flex-end;
 `;

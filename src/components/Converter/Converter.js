@@ -46,6 +46,7 @@ export const Converter = () => {
   const buy = Object.keys(dataBuy);
   const sale = Object.keys(dataSale);
 
+  console.log(input);
   return (
     <>
       <Title>Конвертер валют</Title>
