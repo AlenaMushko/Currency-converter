@@ -25,10 +25,10 @@ export const ReverseConverter = () => {
   };
 
   const calculateOutput = (from, to, input) => {
-    const haveMoney = ((dataSale[from] / dataBuy[to]) * input).toFixed(2);
+    const haveMoney = ((dataBuy[from] / dataSale[to]) * input).toFixed(2);
     setOutput(haveMoney);
-        console.log("куплю  $", dataBuy[from]);
-    console.log("продам e",dataSale[to]);
+        console.log("dataBuy[to]", dataBuy[to]);
+    console.log("dataSale[from]",dataSale[from]);
     console.log(input);
   };
   const handleInputChange = e => {
