@@ -25,7 +25,7 @@ export const Converter = () => {
   };
 
   const calculateOutput = (from, to, input) => {
-    const haveMoney = ((dataSale[from] / dataBuy[to]) * input).toFixed(2);
+    const haveMoney = ((dataBuy[from] / dataSale[to]) * input).toFixed(2);
     setOutput(haveMoney);
   };
   const handleInputChange = e => {

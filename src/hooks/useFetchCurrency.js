@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ApiConvert } from 'ApiCurrency';
+import { ApiConvert } from 'Api';
 
 export const useFetchCurrency = () => {
   const [EUR, setEUR] = useState({});
