@@ -6,6 +6,12 @@ margin-bottom: 32px;
 text-align:center;
 `;
 
+export const UfrerTitle = styled.h3`
+text-align:center;
+margin-bottom: 18px;
+color: turquoise;
+`;
+
 export const List = styled.ul`
 display:flex;
 gap:16px;
@@ -13,7 +19,7 @@ list-style:none;
 align-items:flex-end;
 `;
 
-export const Text = styled.h2`
+export const Text = styled.h3`
 font-size:18px;
 margin-bottom: 12px;
 `;
@@ -25,8 +31,9 @@ list-style:none;
 `;
 
 export const SwitchHorizontal = styled.div`
-border-radius:125px;
-:hover{
-  background-color:turquoise;
-}
+color:turquoise;
+`;
+
+export const Reverse = styled.div`
+margin-top: 40px;
 `;

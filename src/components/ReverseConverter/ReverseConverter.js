@@ -3,10 +3,10 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { TbArrowBigRightLines } from 'react-icons/tb';
 
-import { Wrap, List, Title, Text, SwitchHorizontal, UfrerTitle } from './Converter.styled';
+import { Wrap, List, Text, SwitchHorizontal, UfrerTitle, Reverse } from '../Converter/Converter.styled';
 import { useFetchCurrency } from 'hooks/useFetchCurrency';
 
-export const Converter = () => {
+export const ReverseConverter = () => {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [from, setFrom] = useState('USD');
@@ -25,7 +25,7 @@ export const Converter = () => {
   };
 
   const calculateOutput = (from, to, input) => {
-    const haveMoney = ((dataBuy[from] / dataSale[to]) * input).toFixed(2);
+    const haveMoney = ((dataSale[from] / dataBuy[to]) * input).toFixed(2);
     setOutput(haveMoney);
         console.log("куплю  $", dataBuy[from]);
     console.log("продам e",dataSale[to]);
@@ -48,9 +48,8 @@ export const Converter = () => {
   const sale = Object.keys(dataSale);
 
   return (
-    <>
-      <Title>Конвертер валют</Title>
-      <UfrerTitle>Продати банку</UfrerTitle>
+    <Reverse>
+      <UfrerTitle>Купити в банку</UfrerTitle>
       <List>
         <li>
           <Text>Я маю</Text>
@@ -59,7 +58,7 @@ export const Converter = () => {
               type="text"
               autoComplete="off"
               autoFocus
-              placeholder="сума, яку хочете продати"
+              placeholder="сума, яку хочете поміняти"
               onChange={handleInputChange}
               value={input}
             />
@@ -97,6 +96,6 @@ export const Converter = () => {
           </Wrap>
         </li>
       </List>
-    </>
+    </Reverse>
   );
 };
